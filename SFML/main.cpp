@@ -2,9 +2,11 @@
 
 int main()
 {
-	sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
-	sf::CircleShape shape(100.0f);
-	shape.setFillColor(sf::Color::Green);
+	sf::RenderWindow window(sf::VideoMode(1920, 1080), "SFML works!");
+	sf::Texture texture;
+	texture.loadFromFile("res/playerChar/spaceshipMain.png", sf::IntRect(0,0,125,110));
+	sf::Sprite spaceshipSprite;
+	spaceshipSprite.setTexture(texture);
 
 	while(window.isOpen())
 	{
@@ -16,7 +18,7 @@ int main()
 		}
 
 		window.clear();
-		window.draw(shape);
+		window.draw(spaceshipSprite);
 		window.display();
 	}
 	return 0;
