@@ -4,19 +4,25 @@
 #include <SFML/Graphics.hpp>
 
 const unsigned int JUMPING = 0x01;
+const unsigned int MOVE_LEFT = 0x02;
+const unsigned int MOVE_RIGHT = 0x04;
+const unsigned int FALLING = 0x08;
 
 struct Entity {
 	sf::Sprite sprite;
-	unsigned int flags;
+	unsigned int flags = 0x00000000;
 };
 
-const float GRAVITY_FORCE = 981.f;
+const float GRAVITY_FORCE = 5.f;
+const float JUMP_AIR_TIME = 0.5f;
+const float JUMP_FORCE = -5.f;
+const float MOVE_FORCE = 500.f;
 const int SCREEN_HEIGHT = 1080;
 const int SCREEN_WIDTH = 1920;
 const int PLAYER_HEIGHT = 110;
 const float PLAYER_WEIGHT = 10.f;
 enum MoveDirections{Up=0, Left=1, Right=2, Down=3};
-void UpdateLogic(Entity* gameObjectArray, int size, sf::Time deltaTime);
-void InitGameObjects(Entity* objectArray, int size);
-void DrawRoutine(sf::RenderWindow* window, Entity* drawableObjects, int size);
+void UpdateLogic(Entity* gameObject, int size, float activeTime);
+void InitGameObjects(Entity* object, int size);
+void DrawRoutine(sf::RenderWindow* window, Entity* drawableObject, int size);
 void ApplyGravity(sf::Vector2f* position);

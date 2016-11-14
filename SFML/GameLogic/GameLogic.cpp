@@ -1,29 +1,35 @@
 #include "GameLogic.h"
 
-void UpdateLogic(Entity* gameObjectArray, int size, sf::Time deltaTime) 
+void UpdateLogic(Entity* gameObject, int size, float activeTime) 
 {
-	// F = m * a (newtons)
-	// position = meters
-	// acceleration = meters/second
-	// F = kg * m/s^2
-	// F * s^2 = kg * meters
-	// F * s^2 / kg = meters
+	float totalForce = 0.f;
 
-	// Add up forces on objects
-	for (int i = 0; i < size; i++) {
-		if (gameObjectArray[i].sprite.getPosition().y < (SCREEN_HEIGHT - PLAYER_HEIGHT)){
-			gameObjectArray[i].sprite.move(0.f, GRAVITY_FORCE * deltaTime.asSeconds());
-		}
+	if (gameObject->sprite.getPosition().y < (SCREEN_HEIGHT - PLAYER_HEIGHT)) 
+	{
+		gameObject->flags |= FALLING;
+		totalForce = GRAVITY_FORCE;
 	}
+	else 
+	{
+		gameObject->flags &= ~FALLING;
+	}
+
+	if (gameObject->flags & JUMPING)
+	{
+		totalForce = JUMP_FORCE;
+	}
+
+	// Apply forces to player
+	gameObject->sprite.move(0.f, totalForce * activeTime);
 }
 void InitGameObjects(Entity* objectArray, int size) 
 {
 }
-void DrawRoutine(sf::RenderWindow* window, Entity* drawableObjects, int size)
+void DrawRoutine(sf::RenderWindow* window, Entity* drawableObject, int size)
 {
 	window->clear();
 	for (int i = 0; i < size; i++) {
-		window->draw(drawableObjects[i].sprite);
+		window->draw(drawableObject->sprite);
 	}
 	window->display();
 }

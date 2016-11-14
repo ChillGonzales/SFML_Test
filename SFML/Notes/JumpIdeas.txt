@@ -1,2 +1,5 @@
 How to do jumping:
-1) currently gravity is applied per frame if 
+1) currently gravity is applied per frame if object is not on ground.
+2) jump just changes movement for a duration of time.
+3) Need to figure out a way that actual forces can wrestle with each other for control.
+4) Need to implement some way of adding an instant acceleration to player. 
