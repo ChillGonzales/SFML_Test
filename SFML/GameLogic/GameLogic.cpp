@@ -1,6 +1,6 @@
 #include "GameLogic.h"
 
-void UpdateLogic(sf::Sprite* gameObjectArray, int size, sf::Time deltaTime) 
+void UpdateLogic(Entity* gameObjectArray, int size, sf::Time deltaTime) 
 {
 	// F = m * a (newtons)
 	// position = meters
@@ -11,19 +11,19 @@ void UpdateLogic(sf::Sprite* gameObjectArray, int size, sf::Time deltaTime)
 
 	// Add up forces on objects
 	for (int i = 0; i < size; i++) {
-		if (gameObjectArray[i].getPosition().y < (SCREEN_HEIGHT - PLAYER_HEIGHT)){
-			gameObjectArray[i].move(0.f, GRAVITY_FORCE * deltaTime.asSeconds());
+		if (gameObjectArray[i].sprite.getPosition().y < (SCREEN_HEIGHT - PLAYER_HEIGHT)){
+			gameObjectArray[i].sprite.move(0.f, GRAVITY_FORCE * deltaTime.asSeconds());
 		}
 	}
 }
-void InitGameObjects(sf::Sprite* objectArray, int size) 
+void InitGameObjects(Entity* objectArray, int size) 
 {
 }
-void DrawRoutine(sf::RenderWindow* window, sf::Sprite* drawableObjects, int size)
+void DrawRoutine(sf::RenderWindow* window, Entity* drawableObjects, int size)
 {
 	window->clear();
 	for (int i = 0; i < size; i++) {
-		window->draw(drawableObjects[i]);
+		window->draw(drawableObjects[i].sprite);
 	}
 	window->display();
 }

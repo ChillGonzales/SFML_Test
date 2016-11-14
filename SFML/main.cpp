@@ -13,6 +13,7 @@ int main()
 	texture.loadFromFile("res/playerChar/spaceshipMain.png", sf::IntRect(0,0,125,110));
 	sf::Sprite spaceshipSprite;
 	spaceshipSprite.setTexture(texture);
+	gameObjectArray[0].sprite = spaceshipSprite;
 
 	// Setup starter level
 	//int (*starterLevel)[SCREEN_WIDTH] = new int[SCREEN_HEIGHT][SCREEN_WIDTH];
@@ -31,8 +32,8 @@ int main()
 		{
 			if (event.type == sf::Event::Closed)
 				window.close();
-			if (event.type == sf::Event::KeyPressed)
-				if (event.key.code == sf::Keyboard::Space)
+			//if (event.type == sf::Event::KeyPressed)
+				//if (event.key.code == sf::Keyboard::Space)
 
 		}
 		UpdateLogic(gameObjectArray, NUM_OF_OBJECTS, elapsed);
