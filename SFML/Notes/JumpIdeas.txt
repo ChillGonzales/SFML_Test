@@ -1,0 +1,2 @@
+How to do jumping:
+1) currently gravity is applied per frame if 

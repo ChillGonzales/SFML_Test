@@ -1,11 +1,18 @@
 #include "GameLogic.h"
 
-void UpdateLogic(sf::Sprite* gameObjectArray, int size) 
+void UpdateLogic(sf::Sprite* gameObjectArray, int size, sf::Time deltaTime) 
 {
+	// F = m * a (newtons)
+	// position = meters
+	// acceleration = meters/second
+	// F = kg * m/s^2
+	// F * s^2 = kg * meters
+	// F * s^2 / kg = meters
+
+	// Add up forces on objects
 	for (int i = 0; i < size; i++) {
-		if (gameObjectArray[i].getPosition().x > GRAVITY_FORCE) {
-			gameObjectArray[i].move(-GRAVITY_FORCE, 0.f);
-			std::cout << gameObjectArray[i].getPosition().x << std::endl;
+		if (gameObjectArray[i].getPosition().y < (SCREEN_HEIGHT - PLAYER_HEIGHT)){
+			gameObjectArray[i].move(0.f, GRAVITY_FORCE * deltaTime.asSeconds());
 		}
 	}
 }
