@@ -21,8 +21,6 @@ int main()
 	// Setup time variables
 	sf::Clock deltaTime;
 	sf::Time elapsed;
-	float moveTime = 0.f;
-
 
 	// Main game loop
 	while(window.isOpen())
@@ -30,15 +28,17 @@ int main()
 		elapsed = deltaTime.restart();
 		if (gameObject.flags & JUMPING)
 		{
-			moveTime += elapsed.asSeconds();
-			if (moveTime >= JUMP_AIR_TIME)
+			gameObject.jumpTime += elapsed.asSeconds();
+			if (gameObject.jumpTime >= JUMP_AIR_TIME) 
+			{
 				gameObject.flags &= ~JUMPING;
+				gameObject.jumpTime = 0.f;
+			}
 		}
-		else if (gameObject.flags & FALLING) {
-			moveTime += elapsed.asSeconds();
+		else if (gameObject.flags & FALLING)
+		{
+			gameObject.fallTime += elapsed.asSeconds();
 		}
-		else
-			moveTime = 0.f;
 		sf::Event event;
 		while (window.pollEvent(event))
 		{
@@ -48,10 +48,10 @@ int main()
 				if (event.key.code == sf::Keyboard::Space)
 				{
 					gameObject.flags |= JUMPING;
-					moveTime = 0.f;
+					gameObject.jumpTime = 0.f;
 				}
 		}
-		UpdateLogic(&gameObject, NUM_OF_OBJECTS, moveTime);
+		UpdateLogic(&gameObject, NUM_OF_OBJECTS, elapsed.asSeconds());
 		DrawRoutine(&window, &gameObject, NUM_OF_OBJECTS);
 	}
 	return 0;
