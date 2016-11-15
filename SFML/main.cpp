@@ -49,6 +49,7 @@ int main()
 				{
 					gameObject.flags |= JUMPING;
 					gameObject.jumpTime = 0.f;
+					gameObject.fallTime = 0.f;
 				}
 		}
 		UpdateLogic(&gameObject, NUM_OF_OBJECTS, elapsed.asSeconds());
