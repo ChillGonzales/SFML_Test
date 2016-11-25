@@ -27,11 +27,28 @@ int main()
 		{
 			if (event.type == sf::Event::Closed)
 				window.close();
-			if (event.type == sf::Event::KeyPressed)
-				if (event.key.code == sf::Keyboard::Space)
+			if (event.type == sf::Event::KeyPressed) 
+			{
+				switch (event.key.code)
 				{
-					player.Jump();
+					case sf::Keyboard::Space:
+						player.Jump();
+						break;
+					case sf::Keyboard::D:
+						player.Move(MoveDirections::Right);
+						break;
+					case sf::Keyboard::A:
+						player.Move(MoveDirections::Left);
+						break;
 				}
+			}
+			if (event.type == sf::Event::KeyReleased) 
+			{
+				if (event.key.code == sf::Keyboard::D)
+					player.StopMove();
+				if (event.key.code == sf::Keyboard::A)
+					player.StopMove();
+			}
 		}
 		player.UpdatePosition(elapsed.asMilliseconds());
 		player.Draw(&window);
