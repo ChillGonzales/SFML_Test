@@ -1,22 +1,18 @@
 #include <SFML/Graphics.hpp>
-#include "GameLogic\GameLogic.h"
+#include "GameLogic\Player.h"
 
 int main()
 {
 	// Attempt at preallocating all gameobjects
 	const int NUM_OF_OBJECTS = 15;
 	sf::RenderWindow window(sf::VideoMode(1920, 1080), "SFML");
-	Entity gameObject;
 
-	// Stream in spaceship texture for main player`and create sprite
-	sf::Texture texture;
-	texture.loadFromFile("res/playerChar/spaceshipMain.png", sf::IntRect(0,0,125,110));
-	sf::Sprite spaceshipSprite;
-	spaceshipSprite.setTexture(texture);
-	gameObject.sprite = spaceshipSprite;
+	sf::Texture playerTexture;
+	playerTexture.loadFromFile(pathToPlayerTexture, sf::IntRect(0,0,125,110));
+	sf::Sprite playerSprite;
+	playerSprite.setTexture(playerTexture);
 
-	// Setup starter level
-	//int (*starterLevel)[SCREEN_WIDTH] = new int[SCREEN_HEIGHT][SCREEN_WIDTH];
+	Player player = Player(&playerSprite);
 
 	// Setup time variables
 	sf::Clock deltaTime;
@@ -26,19 +22,6 @@ int main()
 	while(window.isOpen())
 	{
 		elapsed = deltaTime.restart();
-		if (gameObject.flags & JUMPING)
-		{
-			gameObject.jumpTime += elapsed.asSeconds();
-			if (gameObject.jumpTime >= JUMP_AIR_TIME) 
-			{
-				gameObject.flags &= ~JUMPING;
-				gameObject.jumpTime = 0.f;
-			}
-		}
-		else if (gameObject.flags & FALLING)
-		{
-			gameObject.fallTime += elapsed.asSeconds();
-		}
 		sf::Event event;
 		while (window.pollEvent(event))
 		{
@@ -47,13 +30,11 @@ int main()
 			if (event.type == sf::Event::KeyPressed)
 				if (event.key.code == sf::Keyboard::Space)
 				{
-					gameObject.flags |= JUMPING;
-					gameObject.jumpTime = 0.f;
-					gameObject.fallTime = 0.f;
+					player.Jump();
 				}
 		}
-		UpdateLogic(&gameObject, NUM_OF_OBJECTS, elapsed.asSeconds());
-		DrawRoutine(&window, &gameObject, NUM_OF_OBJECTS);
+		player.UpdatePosition(elapsed.asMilliseconds());
+		player.Draw(&window);
 	}
 	return 0;
 }

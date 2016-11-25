@@ -133,10 +133,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="GameLogic\GameLogic.cpp" />
+    <ClCompile Include="GameLogic\Player.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameLogic\GameLogic.h" />
+    <ClInclude Include="GameLogic\Player.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Notes\JumpIdeas.txt" />
