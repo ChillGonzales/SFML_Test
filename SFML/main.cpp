@@ -22,7 +22,7 @@ int main()
 	sf::Sprite bulletSprite;
 	bulletSprite.setTexture(bulletTexture);
 	
-	Bullet bullets[NUM_OF_BULLETS] = Bullet(&bulletSprite);
+	Bullets bullets = Bullets(&bulletSprite, NUM_OF_BULLETS);
 
 	// Setup time variables
 	sf::Clock deltaTime;
@@ -52,6 +52,7 @@ int main()
 						case sf::Keyboard::A:
 							player.Move(MoveDirections::Left);
 							break;
+						case sf::Keyboard::F:
 					}
 				}
 				if (event.type == sf::Event::KeyReleased) 
