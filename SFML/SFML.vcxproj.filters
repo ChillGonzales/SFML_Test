@@ -24,12 +24,18 @@
     <ClCompile Include="GameLogic\Player.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="GameLogic\Bullet.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameLogic\GameLogic.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="GameLogic\Player.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameLogic\Bullet.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

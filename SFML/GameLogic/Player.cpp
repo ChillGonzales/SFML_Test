@@ -25,10 +25,10 @@ void Player::Move(MoveDirections direction)
 	switch (direction) 
 	{
 		case MoveDirections::Right:
-			velocityX += MOVE_VELOCITY;
+			velocityX = MOVE_VELOCITY;
 			break;
 		case MoveDirections::Left:
-			velocityX += -MOVE_VELOCITY;
+			velocityX = -MOVE_VELOCITY;
 			break;
 	}
 
@@ -39,9 +39,7 @@ void Player::StopMove()
 }
 void Player::Draw(sf::RenderWindow * window)
 {
-	window->clear();
 	window->draw(*sprite);
-	window->display();
 }
 Player::~Player()
 {
