@@ -41,6 +41,10 @@ void Player::Draw(sf::RenderWindow * window)
 {
 	window->draw(*sprite);
 }
+sf::Vector2f Player::GetPosition()
+{
+	return this->sprite->getPosition();
+}
 Player::~Player()
 {
 }

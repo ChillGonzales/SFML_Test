@@ -11,6 +11,7 @@ const unsigned int MOVE_RIGHT = 0x04;
 const unsigned int FALLING = 0x08;
 const int GROUND_HEIGHT = 10;
 const int PLAYER_HEIGHT = 110;
+const int PLAYER_WIDTH = 125;
 const float PLAYER_WEIGHT = 50.f;
 const float JUMP_VELOCITY = -2.f;
 const float MOVE_VELOCITY = 2.f;
@@ -19,7 +20,7 @@ const std::string pathToPlayerTexture = "res/playerChar/spaceshipMain.png";
 class Player {
 private:
 	sf::Sprite* sprite;
-	unsigned int flags = 0x00000000;
+	unsigned int flags = 0;
 	float velocityX = 0.f;
 	float velocityY = 0.f;
 public:
@@ -29,5 +30,6 @@ public:
 	void Move(MoveDirections direction);
 	void StopMove();
 	void Draw(sf::RenderWindow* window);
+	sf::Vector2f GetPosition();
 	~Player();
 };
