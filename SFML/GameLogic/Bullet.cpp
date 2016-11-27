@@ -3,10 +3,10 @@
 
 Bullets::Bullets()
 {
+	sf::Texture* bulletTexture = new sf::Texture;
+	bulletTexture->loadFromFile(pathToBulletTexture);
 	for (int i = 0; i < NUM_OF_BULLETS; ++i)
 	{
-		sf::Texture* bulletTexture = new sf::Texture;
-		bulletTexture->loadFromFile(pathToBulletTexture);
 		this->sprite[i] = new sf::Sprite(*bulletTexture);
 		this->flags[i] = 0;
 	}
