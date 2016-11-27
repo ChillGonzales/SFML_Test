@@ -16,12 +16,8 @@ int main()
 	Player player = Player(&playerSprite);
 
 	// Set up bullet array
-	sf::Texture bulletTexture;
-	bulletTexture.loadFromFile(pathToBulletTexture);
-	sf::Sprite bulletSprite;
-	bulletSprite.setTexture(bulletTexture);
 	
-	Bullets bullets = Bullets(&bulletSprite);
+	Bullets* bullets = new Bullets();
 
 	// Setup time variables
 	sf::Clock deltaTime;
@@ -52,24 +48,22 @@ int main()
 							player.Move(MoveDirections::Left);
 							break;
 						case sf::Keyboard::F:
-							bullets.Shoot(player.GetPosition());
+							bullets->Shoot(player.GetPosition());
 							break;
 					}
 				}
 				if (event.type == sf::Event::KeyReleased) 
 				{
-					if (event.key.code == sf::Keyboard::D)
-						player.StopMove();
-					if (event.key.code == sf::Keyboard::A)
+					if (event.key.code == sf::Keyboard::D || event.key.code == sf::Keyboard::A)
 						player.StopMove();
 				}
 			}
 			player.UpdatePosition(elapsed.asMilliseconds());
-			bullets.UpdatePosition(elapsed.asMilliseconds());
+			bullets->UpdatePosition(elapsed.asMilliseconds());
 
 			window.clear();
 			player.Draw(&window);
-			bullets.Draw(&window);
+			bullets->Draw(&window);
 			window.display();
 
 			elapsed = sf::Time::Zero;
