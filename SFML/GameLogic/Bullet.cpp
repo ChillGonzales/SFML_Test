@@ -10,13 +10,17 @@ Bullets::Bullets()
 		this->sprite[i] = new sf::Sprite(*bulletTexture);
 		this->flags[i] = 0;
 	}
+	this->activeBullet = 0;
 }
 void Bullets::Shoot(sf::Vector2f startPosition)
 {
 	this->flags[activeBullet] |= VISIBLE;
 	this->sprite[activeBullet]->setPosition(startPosition.x + 50, startPosition.y);
-	if (activeBullet = NUM_OF_BULLETS - 1) { activeBullet = 0; }
-	else { activeBullet++; }
+	if (activeBullet == NUM_OF_BULLETS - 1) 
+		this->activeBullet = 0; 
+	else 
+		this->activeBullet++; 
+	std::cout << this->activeBullet << std::endl;
 }
 void Bullets::CheckForEnemy()
 {
@@ -35,8 +39,9 @@ void Bullets::UpdatePosition(float deltaTime)
 void Bullets::Draw(sf::RenderWindow* window)
 {
 	for (int i = 0; i <= activeBullet; ++i) {
-		if (this->flags[i] & VISIBLE) 
-		{ 
+		if (this->flags[i] & VISIBLE)
+		{
+			//std::cout << activeBullet << std::endl;
 			window->draw(*sprite[i]); 
 		}
 	}

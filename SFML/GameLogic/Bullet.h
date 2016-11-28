@@ -5,8 +5,8 @@
 #include <SFML/Graphics.hpp>
 
 const std::string pathToBulletTexture = "res/playerChar/bulletPlayer.png";
-const int NUM_OF_BULLETS = 60;
-const float BULLET_VELOCITY = -0.1f;
+const int NUM_OF_BULLETS = 100;
+const float BULLET_VELOCITY = -1.f;
 const unsigned int VISIBLE = 0x01;
 
 class Bullets
