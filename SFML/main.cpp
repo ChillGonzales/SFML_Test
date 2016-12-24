@@ -9,15 +9,15 @@ int main()
 
 	// Set up player class
 	sf::Texture playerTexture;
-	playerTexture.loadFromFile(pathToPlayerTexture, sf::IntRect(0,0,125,110));
-	sf::Sprite playerSprite;
-	playerSprite.setTexture(playerTexture);
+	playerTexture.loadFromFile(pathToPlayerTexture);
+	sf::IntRect playerRect(WALK_FRAME_START_X, WALK_FRAME_START_Y, PLAYER_WIDTH, PLAYER_HEIGHT);
+	sf::Sprite playerSprite(playerTexture, playerRect);
 
 	Player player = Player(&playerSprite);
 
 	// Set up bullet array
 	
-	Bullets* bullets = new Bullets();
+	Bullets* bullets = new Bullets(&playerTexture);
 
 	// Setup time variables
 	sf::Clock deltaTime;
@@ -63,7 +63,7 @@ int main()
 
 			window.clear();
 			player.Draw(&window);
-			bullets->Draw(&window);
+			bullets->Draw(&window, elapsed.asMilliseconds());
 			window.display();
 
 			elapsed = sf::Time::Zero;
