@@ -15,7 +15,7 @@ Bullets::Bullets(sf::Texture* texture)
 void Bullets::Shoot(sf::Vector2f startPosition)
 {
 	this->flags[activeBullet] |= VISIBLE;
-	this->sprite[activeBullet]->setPosition(startPosition.x + 50, startPosition.y);
+	this->sprite[activeBullet]->setPosition(startPosition.x + 50, startPosition.y + 32);
 	if (activeBullet == NUM_OF_BULLETS - 1) 
 		this->activeBullet = 0; 
 	else 
@@ -30,9 +30,9 @@ void Bullets::UpdatePosition(float deltaTime)
 {
 	for (int i = 0; i <= NUM_OF_BULLETS-1; ++i) 
 	{
-		float newPositionY = this->sprite[i]->getPosition().y + (BULLET_VELOCITY * deltaTime);
-		this->sprite[i]->setPosition(this->sprite[i]->getPosition().x, newPositionY);
-		if (newPositionY < 0)
+		float newPositionX = this->sprite[i]->getPosition().x + (BULLET_VELOCITY * deltaTime);
+		this->sprite[i]->setPosition(newPositionX, this->sprite[i]->getPosition().y);
+		if (newPositionX > SCREEN_WIDTH)
 			this->flags[i] &= ~VISIBLE;
 	}
 }
@@ -44,12 +44,12 @@ void Bullets::Draw(sf::RenderWindow* window, float deltaTime)
 			this->accruedTime[i] += deltaTime;
 			if (this->accruedTime[i] >= updateFPSTime) 
 			{ 
-				std::cout << this->accruedTime << std::endl;
-				accruedTime[i] -= updateFPSTime;
-				if ((bulletRect.left - BULLET_FRAME_START_X) > (PLAYER_WIDTH * 4))
+				if ((bulletRect.left - BULLET_FRAME_START_X) >= (BULLET_WIDTH * (FPS - 1)))
 					bulletRect.left = BULLET_FRAME_START_X;
 				else
-					bulletRect.left += PLAYER_WIDTH;
+					bulletRect.left += BULLET_WIDTH;
+				accruedTime[i] -= updateFPSTime;
+				sprite[i]->setTextureRect(bulletRect);
 			}
 			window->draw(*sprite[i]); 
 		}

@@ -7,16 +7,10 @@ int main()
 	// Attempt at preallocating all gameobjects
 	sf::RenderWindow window(sf::VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT), "SFML");
 
-	// Set up player class
 	sf::Texture playerTexture;
 	playerTexture.loadFromFile(pathToPlayerTexture);
-	sf::IntRect playerRect(WALK_FRAME_START_X, WALK_FRAME_START_Y, PLAYER_WIDTH, PLAYER_HEIGHT);
-	sf::Sprite playerSprite(playerTexture, playerRect);
 
-	Player player = Player(&playerSprite);
-
-	// Set up bullet array
-	
+	Player player = Player(&playerTexture);
 	Bullets* bullets = new Bullets(&playerTexture);
 
 	// Setup time variables
@@ -50,6 +44,9 @@ int main()
 						case sf::Keyboard::F:
 							bullets->Shoot(player.GetPosition());
 							break;
+						case sf::Keyboard::E:
+							player.SpecialAction(ActionTypes::LightningAttack);
+							break;
 					}
 				}
 				if (event.type == sf::Event::KeyReleased) 
@@ -62,7 +59,7 @@ int main()
 			bullets->UpdatePosition(elapsed.asMilliseconds());
 
 			window.clear();
-			player.Draw(&window);
+			player.Draw(&window, elapsed.asMilliseconds());
 			bullets->Draw(&window, elapsed.asMilliseconds());
 			window.display();
 

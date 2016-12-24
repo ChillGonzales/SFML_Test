@@ -3,7 +3,7 @@
 #include <SFML/System.hpp>
 #include <SFML/Graphics.hpp>
 
-const float GRAVITY_FORCE = 0.5f;
+const float GRAVITY_FORCE = 0.3f;
 const float JUMP_AIR_TIME = 0.5f;
 const int SCREEN_HEIGHT = 600;
 const int SCREEN_WIDTH = 800;
