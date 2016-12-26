@@ -1,5 +1,6 @@
 #pragma once
 #include "GameLogic.h"
+#include "Animation.h"
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
 
@@ -17,10 +18,14 @@ const unsigned char LIGHTNING_ATTACK_STATE = 0x01;
 const unsigned char ICE_SHIELD_STATE = 0x02;
 
 // GRAPHICS CONSTANTS
+const int ANIM_COUNT = 3;
 const int PLAYER_HEIGHT = 75;
 const int PLAYER_WIDTH = 68;
 const int WALK_FRAME_START_X = 50;
 const int WALK_FRAME_START_Y = 13;
+int WALK_FRAME_XPOSITIONS[] = { 50, 118, 186, 30, 98, 166, 234 };
+int WALK_FRAME_YPOSITIONS[] = { 13, 13, 13, 100, 100, 100, 100 };
+const int WALK_FPS = 7;
 const int LIGHTNING_ATTACK_FPS = 9;
 const float LIGHTNING_ATTACK_UPDATE_TIME = (1.0 / LIGHTNING_ATTACK_FPS) * 1000;
 const int LIGHT_ATK_FRAME_START_X = 550;
@@ -40,6 +45,7 @@ class Player {
 private:
 	sf::Sprite* sprite;
 	sf::IntRect playerRect;
+	Animation * animations;
 	unsigned char flags = 0;
 	unsigned char specialType = 0;
 	float accruedTime = 0.f;
@@ -57,3 +63,4 @@ public:
 	sf::Vector2f GetPosition();
 	~Player();
 };
+

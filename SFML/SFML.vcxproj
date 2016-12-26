@@ -132,12 +132,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="GameLogic\Animation.cpp" />
     <ClCompile Include="GameLogic\Bullet.cpp" />
     <ClCompile Include="GameLogic\GameLogic.cpp" />
     <ClCompile Include="GameLogic\Player.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="GameLogic\Animation.h" />
     <ClInclude Include="GameLogic\Bullet.h" />
     <ClInclude Include="GameLogic\GameLogic.h" />
     <ClInclude Include="GameLogic\Player.h" />

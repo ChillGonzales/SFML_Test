@@ -4,6 +4,9 @@ Player::Player(sf::Texture* texture)
 {
 	playerRect = sf::IntRect(WALK_FRAME_START_X, WALK_FRAME_START_Y, PLAYER_WIDTH, PLAYER_HEIGHT);
 	this->sprite = new sf::Sprite(*texture, playerRect);
+	this->animations = new Animation[ANIM_COUNT];
+	this->animations[0].SetVars("Walk", WALK_FPS, WALK_FRAME_XPOSITIONS, WALK_FRAME_YPOSITIONS, PLAYER_HEIGHT);
+	this->animations[1].SetVars("Lightning",LIGHTNING_ATTACK_FPS, LIGHT_ATK_FRAME_START_X)
 }
 void Player::UpdatePosition(float deltaTime)
 {
@@ -26,13 +29,14 @@ void Player::Move(MoveDirections direction)
 	switch (direction) 
 	{
 		case MoveDirections::Right:
+			this->flags |= MOVE_RIGHT;
 			velocityX = MOVE_VELOCITY;
 			break;
 		case MoveDirections::Left:
+			this->flags |= MOVE_LEFT;
 			velocityX = -MOVE_VELOCITY;
 			break;
 	}
-
 }
 void Player::StopMove()
 {
@@ -82,6 +86,11 @@ void Player::Draw(sf::RenderWindow * window, float deltaTime)
 			std::cout << playerRect.left << std::endl;
 		}
 	}
+	//else if (this->flags & MOVE_RIGHT) 
+	//{
+	//	playerRect.left = WALK_FRAME_START_X;
+	//	playerRect.top
+	//}
 
 	window->draw(*sprite);
 }
