@@ -1,12 +1,15 @@
 #include "Player.h"
 
+int WALK_FRAME_XPOSITIONS[] = { 50, 118, 186, 30, 98, 166, 234 };
+int WALK_FRAME_YPOSITIONS[] = { 13, 13, 13, 100, 100, 100, 100 };
+
 Player::Player(sf::Texture* texture)
 {
 	playerRect = sf::IntRect(WALK_FRAME_START_X, WALK_FRAME_START_Y, PLAYER_WIDTH, PLAYER_HEIGHT);
 	this->sprite = new sf::Sprite(*texture, playerRect);
 	this->animations = new Animation[ANIM_COUNT];
 	this->animations[0].SetVars("Walk", WALK_FPS, WALK_FRAME_XPOSITIONS, WALK_FRAME_YPOSITIONS, PLAYER_HEIGHT);
-	this->animations[1].SetVars("Lightning",LIGHTNING_ATTACK_FPS, LIGHT_ATK_FRAME_START_X)
+	this->animations[1].SetVars("Lightning", LIGHTNING_ATTACK_FPS, LIGHT_ATK_FRAME_START_X, LIGHT_ATK_FRAME_START_Y, PLAYER_WIDTH, LIGHT_ATK_HEIGHT);
 }
 void Player::UpdatePosition(float deltaTime)
 {
@@ -86,11 +89,16 @@ void Player::Draw(sf::RenderWindow * window, float deltaTime)
 			std::cout << playerRect.left << std::endl;
 		}
 	}
-	//else if (this->flags & MOVE_RIGHT) 
-	//{
-	//	playerRect.left = WALK_FRAME_START_X;
-	//	playerRect.top
-	//}
+	else if (this->flags & MOVE_RIGHT)
+	{
+		if (this->animations[0].MoveToNextFrame(deltaTime))
+		{
+			playerRect.left = this->animations[0].GetCurrentLeft();
+			playerRect.top = this->animations[0].GetCurrentTop();
+			playerRect.height = this->animations[0].GetHeight();
+			this->sprite->setTextureRect(playerRect);
+		}
+	}
 
 	window->draw(*sprite);
 }
