@@ -1,7 +1,7 @@
 #include "Player.h"
 
-int WALK_FRAME_XPOSITIONS[] = { 50, 118, 186, 30, 98, 166, 234 };
-int WALK_FRAME_YPOSITIONS[] = { 13, 13, 13, 100, 100, 100, 100 };
+int WALK_FRAME_XPOSITIONS[] = { 10, 68, 124, 179, 222, 271, 325 };
+int WALK_FRAME_YPOSITIONS[] = { 0, 0, 0, 0, 0, 0, 0 };
 
 Player::Player(sf::Texture* texture)
 {
@@ -44,6 +44,8 @@ void Player::Move(MoveDirections direction)
 void Player::StopMove()
 {
 	velocityX = 0;
+	this->flags &= ~MOVE_LEFT;
+	this->flags &= ~MOVE_RIGHT;
 }
 void Player::SpecialAction(ActionTypes action)
 {
@@ -84,7 +86,6 @@ void Player::Draw(sf::RenderWindow * window, float deltaTime)
 			{
 				playerRect.left += PLAYER_WIDTH;
 			}
-			this->sprite->setTextureRect(playerRect);
 			this->accruedTime -= LIGHTNING_ATTACK_UPDATE_TIME;
 			std::cout << playerRect.left << std::endl;
 		}
@@ -96,10 +97,16 @@ void Player::Draw(sf::RenderWindow * window, float deltaTime)
 			playerRect.left = this->animations[0].GetCurrentLeft();
 			playerRect.top = this->animations[0].GetCurrentTop();
 			playerRect.height = this->animations[0].GetHeight();
-			this->sprite->setTextureRect(playerRect);
 		}
 	}
+	else
+	{
+		playerRect.left = WALK_FRAME_START_X;
+		playerRect.top = WALK_FRAME_START_Y;
+		playerRect.height = PLAYER_HEIGHT;
+	}
 
+	this->sprite->setTextureRect(playerRect);
 	window->draw(*sprite);
 }
 sf::Vector2f Player::GetPosition()

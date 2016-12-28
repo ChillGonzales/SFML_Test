@@ -20,9 +20,9 @@ const unsigned char ICE_SHIELD_STATE = 0x02;
 // GRAPHICS CONSTANTS
 const int ANIM_COUNT = 3;
 const int PLAYER_HEIGHT = 75;
-const int PLAYER_WIDTH = 68;
-const int WALK_FRAME_START_X = 50;
-const int WALK_FRAME_START_Y = 13;
+const int PLAYER_WIDTH = 64;
+const int WALK_FRAME_START_X = 10;
+const int WALK_FRAME_START_Y = 0;
 const int WALK_FPS = 7;
 const int LIGHTNING_ATTACK_FPS = 9;
 const float LIGHTNING_ATTACK_UPDATE_TIME = (1.0 / LIGHTNING_ATTACK_FPS) * 1000;
